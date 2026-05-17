@@ -146,6 +146,84 @@ ccflags-y += -I$(src)/nic
 ccflags-y += -I$(src)/nic/utility
 ccflags-y += -I$(src)/nic/p2p
 
+ccflags-y += -DZT_DEBUG_LEVEL=$(CONFIG_DEBUG_LEVEL)
+
+ifeq ($(CONFIG_DRIVER_VER), null)
+ccflags-y += -D'ZT_VERSION="[svn]"'
+else
+ccflags-y += -D'ZT_VERSION="$(CONFIG_DRIVER_VER)"'
+endif
+
+ifeq ($(CONFIG_MODULE_IMPORT_NS), y)
+ccflags-y += -DCONFIG_MODULE_IMPORT_NS
+endif
+
+ifeq ($(CONFIG_FW_FILE), y)
+ccflags-y += -DCONFIG_FW_FILE
+endif
+
+ifeq ($(CONFIG_ZT9101XV20_SUPPORT), y)
+ccflags-y += -DCONFIG_ZT9101XV20_SUPPORT
+endif
+
+ifeq ($(CONFIG_ZT9101XV30_SUPPORT), y)
+ccflags-y += -DCONFIG_ZT9101XV30_SUPPORT
+endif
+
+ifeq ($(CONFIG_TX_SOFT_AGG), y)
+ccflags-y += -DCONFIG_SOFT_TX_AGGREGATION
+endif
+
+ifeq ($(CONFIG_RX_SOFT_AGG), y)
+ccflags-y += -DCONFIG_SOFT_RX_AGGREGATION
+endif
+
+ifeq ($(CONFIG_HIF_PORT), usb)
+ccflags-y += -DCONFIG_USB_FLAG
+else ifeq ($(CONFIG_HIF_PORT), sdio)
+ccflags-y += -DCONFIG_SDIO_FLAG
+else
+ccflags-y += -DCONFIG_BOTH_FLAG
+endif
+
+ifeq ($(CONFIG_CLOCK_24MHZ), y)
+ccflags-y += -DCONFIG_CLOCK_24MHZ
+endif
+
+ifeq ($(CONFIG_WIFI_MODE), ap)
+ccflags-y += -DCFG_ENABLE_AP_MODE
+ccflags-y += -DZT_WEP_AUTH_ENABLE_WEXT
+endif
+
+ifeq ($(CONFIG_WIFI_MODE), monitor)
+ccflags-y += -DCFG_ENABLE_MONITOR_MODE
+endif
+
+ifeq ($(CONFIG_WIFI_MODE), adhoc)
+ccflags-y += -DCFG_ENABLE_ADHOC_MODE
+endif
+
+ifeq ($(CONFIG_WIFI_MODE), all)
+ccflags-y += -DCFG_ENABLE_AP_MODE
+ccflags-y += -DCFG_ENABLE_ADHOC_MODE
+ccflags-y += -DCFG_ENABLE_MONITOR_MODE
+ccflags-y += -DZT_WEP_AUTH_ENABLE_WEXT
+endif
+
+ifeq ($(CONFIG_WIFI_FRAMEWORK), nl80211)
+ccflags-y += -DCONFIG_IOCTL_CFG80211 -DZT_USE_CFG80211_STA_EVENT
+else ifeq ($(CONFIG_WIFI_FRAMEWORK), mp)
+ccflags-y += -DCONFIG_MP_MODE
+endif
+
+ifeq ($(CONFIG_STA_AND_AP_MODE), y)
+ccflags-y += -DCONFIG_STA_AND_AP_MODE
+endif
+
+ifeq ($(CONFIG_POWER_SAVING), y)
+ccflags-y += -DCONFIG_LPS
+endif
+
 ifeq ($(CONFIG_HIF_PORT), usb)
 $(MODULE_NAME)-y += os/linux/hif/usb.o
 else ifeq ($(CONFIG_HIF_PORT), sdio)
