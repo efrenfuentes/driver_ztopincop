@@ -134,6 +134,18 @@ EXTRA_LDFLAGS += --strip-debug
 
 ifneq ($(KERNELRELEASE),)
 
+ccflags-y += -I$(src)/os/
+ccflags-y += -I$(src)/os/linux
+ccflags-y += -I$(src)/os/linux/os_porting
+ccflags-y += -I$(src)/os/linux/hif
+ccflags-y += -I$(src)/os/linux/netdev
+ccflags-y += -I$(src)/os/linux/cfg80211
+ccflags-y += -I$(src)/os/linux/iw
+ccflags-y += -I$(src)/os/linux/pwr
+ccflags-y += -I$(src)/nic
+ccflags-y += -I$(src)/nic/utility
+ccflags-y += -I$(src)/nic/p2p
+
 ifeq ($(CONFIG_HIF_PORT), usb)
 $(MODULE_NAME)-y += os/linux/hif/usb.o
 else ifeq ($(CONFIG_HIF_PORT), sdio)
