@@ -2258,7 +2258,7 @@ exit:
 }
 
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
 static zt_s32 _set_wiphy_params(struct wiphy *wiphy, int link_id, zt_u32 changed)
 #else
 static zt_s32 _set_wiphy_params(struct wiphy *wiphy, zt_u32 changed)
@@ -2882,7 +2882,7 @@ static zt_s32 _call_set_txpower(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
                                 struct wireless_dev *wdev,
 #endif
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
                                 int link_id,
 #endif
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 36)) || defined(COMPAT_KERNEL_RELEASE)
@@ -2901,7 +2901,7 @@ static zt_s32 _call_get_txpower(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
                                 struct wireless_dev *wdev,
 #endif
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 1, 0))
                                 int link_id, unsigned int radio_idx,
 #endif
                                 zt_s32 *dbm)
