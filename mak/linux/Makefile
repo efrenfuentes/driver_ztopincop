@@ -146,6 +146,38 @@ ccflags-y += -I$(src)/nic
 ccflags-y += -I$(src)/nic/utility
 ccflags-y += -I$(src)/nic/p2p
 
+# Platform endianness — mirrors EXTRA_CFLAGS set in platform.mak
+ifeq ($(CONFIG_PLATFORM_I386_PC), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_ARM_tiny4412), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_RASP_PI), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_GK7102), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_GK7202), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_GK7205), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_MIPS_T31), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_ARM_nuc980_iot), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_ARM_FH8626), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+ifeq ($(CONFIG_PLATFORM_ARM_GP329), y)
+ccflags-y += -DCONFIG_LITTLE_ENDIAN
+endif
+
 ccflags-y += -DZT_DEBUG_LEVEL=$(CONFIG_DEBUG_LEVEL)
 
 ifeq ($(CONFIG_DRIVER_VER), null)
