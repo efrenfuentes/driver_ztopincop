@@ -2258,7 +2258,11 @@ exit:
 }
 
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0))
+static zt_s32 _set_wiphy_params(struct wiphy *wiphy, int link_id, zt_u32 changed)
+#else
 static zt_s32 _set_wiphy_params(struct wiphy *wiphy, zt_u32 changed)
+#endif
 {
     CFG80211_DBG();
 
@@ -2878,6 +2882,9 @@ static zt_s32 _call_set_txpower(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
                                 struct wireless_dev *wdev,
 #endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0))
+                                int link_id,
+#endif
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 36)) || defined(COMPAT_KERNEL_RELEASE)
                                 enum nl80211_tx_power_setting type, zt_s32 mbm)
 #else
@@ -2893,6 +2900,9 @@ static zt_s32 _call_set_txpower(struct wiphy *wiphy,
 static zt_s32 _call_get_txpower(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
                                 struct wireless_dev *wdev,
+#endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0))
+                                int link_id, unsigned int radio_idx,
 #endif
                                 zt_s32 *dbm)
 {
@@ -3039,6 +3049,9 @@ static zt_s32 _flush_pmksa_cb(struct wiphy *wiphy,
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 6, 0))
 static zt_s32 _set_monitor_channel(struct wiphy *wiphy
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 9, 0))
+                                   , struct net_device *ndev
+#endif
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
                                    , struct cfg80211_chan_def *chandef
 #else
